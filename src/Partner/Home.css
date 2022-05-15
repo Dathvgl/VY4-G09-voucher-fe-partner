@@ -1,0 +1,11 @@
+.link {
+    text-decoration: none;
+    color: black;
+    padding: 0.5rem;
+    display: block;
+}
+
+.active-link, .link:hover {
+    color: white;
+    background-color: #0099ff;
+}
