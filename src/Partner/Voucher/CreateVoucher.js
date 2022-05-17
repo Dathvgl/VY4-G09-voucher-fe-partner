@@ -17,8 +17,7 @@ function CreateVoucher(props) {
     if (Object.keys(form).length === 0) return;
     if (Object.keys(error).length !== 0) return;
     TaskAPI.postVoucher(form);
-    console.log(form);
-    // navigate("/voucher/home");
+    navigate("/voucher/home");
   }, [form, error, navigate]);
 
   useEffect(() => {
@@ -105,6 +104,8 @@ function CreateVoucher(props) {
 
     setForm((obj) => ({ ...obj, placeUse: placeUseList }));
     setForm((obj) => ({ ...obj, partner: props.partner }));
+    setForm((obj) => ({ ...obj, userUse: [] }));
+    setForm((obj) => ({ ...obj, userOwned: [] }));
 
     if (checkQuantity) setForm((obj) => ({ ...obj, quantity: -1 }));
     else validInputNum(e.target.elements["quantity"].value, "quantity");
