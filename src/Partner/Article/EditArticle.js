@@ -16,8 +16,9 @@ function EditArticle() {
   const onFormSubmit = (e, id) => {
     e.preventDefault();
 
+    const thumnail = e.target.elements["thumnail"].value;
     const content = e.target.elements["content"].value;
-    TaskAPI.putArticleContent(id, content);
+    TaskAPI.putArticleContent(id, { thumnail: thumnail, content: content });
     navigate("/article/home");
   };
 
@@ -37,6 +38,14 @@ function EditArticle() {
           </Col>
         </Row>
         <Form onSubmit={(e) => onFormSubmit(e, article.id)}>
+          <Row className="my-3">
+            <Col lg={6}>
+              <Form.Group>
+                <h3>Tên hình ảnh</h3>
+                <Form.Control name="thumnail" defaultValue={article.thumnail} />
+              </Form.Group>
+            </Col>
+          </Row>
           <Row className="my-3">
             <Form.Group as={Col}>
               <h3>Nội dung bài viết</h3>
