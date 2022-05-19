@@ -64,7 +64,7 @@ export default class TaskAPI {
   // Giftcard
   static async getGiftcards(service) {
     const promise = axios.get(
-      `${BaseURL}/giftcards/find/giftcard?service=${service}`
+      `${BaseURL}/giftcards/find/?service=${service}`
     );
     const dataPromise = promise.then((res) => res.data);
     return dataPromise;
