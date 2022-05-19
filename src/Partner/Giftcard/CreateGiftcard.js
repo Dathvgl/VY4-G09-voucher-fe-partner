@@ -19,13 +19,12 @@ function CreateGiftcard(props) {
     TaskAPI.postGiftcard(form)
       .then((res) => {
         if (res.ok) {
-          // navigate("/giftcard/home");
+          navigate("/giftcard/home");
         }
       })
       .catch((error) => setError((obj) => ({ ...obj, error })));
       console.log(error);
-    navigate("/giftcard/home");
-  }, [form, navigate]);
+  }, [form, error, navigate]);
 
   const validNum = (str) => {
     const reg = new RegExp("^\\d+$");
@@ -49,6 +48,7 @@ function CreateGiftcard(props) {
     const base = {
       id: "",
       name: "",
+      service: "",
       // price: 0,
       // quantity: 0,
     };
