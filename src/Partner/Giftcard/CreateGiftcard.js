@@ -17,9 +17,9 @@ function CreateGiftcard(props) {
     if (Object.keys(form).length === 0) return;
     TaskAPI.postGiftcard(form)
       .then((res) => {
-        console.log(res);
-        console.log(res.OK);
-        // navigate("/giftcard/home");
+        if (res.ok) {
+          navigate("/giftcard/home");
+        }
       })
       .catch((error) => setError((obj) => ({ ...obj, error })));
   }, [form, navigate]);
