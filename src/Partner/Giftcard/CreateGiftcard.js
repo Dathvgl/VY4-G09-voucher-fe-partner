@@ -14,12 +14,13 @@ function CreateGiftcard(props) {
   useEffect(() => {}, []);
 
   useEffect(() => {
+    if (Object.keys(form).length === 0) return;
     TaskAPI.postGiftcard(form)
       .then((res) => {
         navigate("/giftcard/home");
       })
       .catch((error) => setError((obj) => ({ ...obj, error })));
-  }, [navigate]);
+  }, [form, navigate]);
 
   const validNum = (str) => {
     const reg = new RegExp("^\\d+$");
