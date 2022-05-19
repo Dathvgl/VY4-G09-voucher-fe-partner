@@ -43,6 +43,13 @@ function CreateArticle(props) {
                 placeholder="Nhập nội dung"
               />
             </Form.Group>
+            <Form.Group as={Col}>
+              <Form.Label>Url hình ảnh</Form.Label>
+              <Form.Control
+                name="thumnail"
+                type="text"
+              />
+            </Form.Group>
           </Row>
           <Row className="my-3">
             <Form.Group as={Col}>
@@ -55,9 +62,6 @@ function CreateArticle(props) {
               />
             </Form.Group>
           </Row>
-          <Form.Group className="my-3">
-            <input dir="/src/Images" accept=".jpg,.png" type={"file"} />
-          </Form.Group>
           <Button className="my-1" variant="primary" type="submit">
             Tạo bài viết
           </Button>
