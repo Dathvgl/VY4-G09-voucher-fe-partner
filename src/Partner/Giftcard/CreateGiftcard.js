@@ -15,13 +15,16 @@ function CreateGiftcard(props) {
 
   useEffect(() => {
     if (Object.keys(form).length === 0) return;
+    if (Object.keys(error).length !== 0) return;
     TaskAPI.postGiftcard(form)
       .then((res) => {
         if (res.ok) {
-          navigate("/giftcard/home");
+          // navigate("/giftcard/home");
         }
       })
       .catch((error) => setError((obj) => ({ ...obj, error })));
+      console.log(error);
+    navigate("/giftcard/home");
   }, [form, navigate]);
 
   const validNum = (str) => {

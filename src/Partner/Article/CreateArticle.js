@@ -8,6 +8,7 @@ function CreateArticle(props) {
   const formNeed = {
     name: "",
     content: "",
+    thumnail: "",
   };
 
   const navigate = useNavigate();
