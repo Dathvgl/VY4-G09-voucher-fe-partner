@@ -1,17 +1,28 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Form, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import TaskAPI from "../../api/task.api";
+import { Services } from "../../Fake_Data";
 
 function Home() {
   const [giftcards, setGiftcards] = useState([]);
 
   useEffect(() => {
-    if (giftcards.length !== 0) return;
-    const res = TaskAPI.getGiftcards("");
+    const res = TaskAPI.getGiftcards(Services[0]);
     res.then((data) => setGiftcards(data));
-  }, [giftcards]);
+  }, []);
+
+  const onSelectSearch = (e) => {
+    const value = e.target.value;
+    const res = TaskAPI.getGiftcards(value);
+    res.then((data) => setGiftcards(data));
+  };
+
+  const onDelete = (e) => {
+    const id = e.target.value;
+    TaskAPI.deleteGiftCard(id);
+  };
 
   return (
     <React.Fragment>
@@ -22,6 +33,13 @@ function Home() {
             <Button variant="primary">Tạo thẻ quà tặng</Button>
           </Link>
         </div>
+        <Form.Select onChange={onSelectSearch}>
+          {Services.map((item, index) => (
+            <option value={item} key={index}>
+              {item}
+            </option>
+          ))}
+        </Form.Select>
         <Table hover>
           <thead>
             <tr>
@@ -30,7 +48,7 @@ function Home() {
               <th>Ngày sử dụng</th>
               <th>Người sử dụng</th>
               <th>Mệnh giá</th>
-              <th>Tình trạng</th>
+              <th>Tùy chọn</th>
             </tr>
           </thead>
           <tbody>
@@ -42,7 +60,11 @@ function Home() {
                   <td>{item.dateUse}</td>
                   <td>{item.userUse}</td>
                   <td>{item.price}</td>
-                  <td>{item.status}</td>
+                  <td>
+                    <Button onClick={onDelete} value={item.id} variant="danger">
+                      Xóa
+                    </Button>
+                  </td>
                 </tr>
               );
             })}

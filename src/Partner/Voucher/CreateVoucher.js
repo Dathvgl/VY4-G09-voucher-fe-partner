@@ -9,7 +9,6 @@ function CreateVoucher(props) {
   const navigate = useNavigate();
   const [form, setForm] = useState({});
   const [error, setError] = useState({});
-  const [listId, setListId] = useState([]);
   const [checkQuantity, setCheckQuantity] = useState(false);
   const [placeUseList, setPlaceUseList] = useState([]);
 
@@ -21,57 +20,12 @@ function CreateVoucher(props) {
   }, [form, error, navigate]);
 
   useEffect(() => {
-    const res = TaskAPI.getVouchersId();
-    res.then((data) =>
-      data.forEach((item) => {
-        setListId((array) => [...array, item.id]);
-      })
-    );
-
     setPlaceUseList([]);
   }, []);
 
   const validNum = (str) => {
     const reg = new RegExp("^\\d+$");
     return reg.test(str);
-  };
-
-  const validDate = (start, end) => {
-    if (start === "") return true;
-    if (start === "" && end === "") return true;
-    if (end === "") {
-      setError((obj) => ({
-        ...obj,
-        dateEnd: "Đã có bắt đầu thì nên có hết hạn",
-      }));
-      return false;
-    }
-
-    const todaySplit = new Date().toISOString().slice(0, 10).split("-");
-    const startSplit = start.split("-");
-    const endSplit = end.split("-");
-
-    if (
-      todaySplit[0] > startSplit[0] ||
-      (todaySplit[0] === startSplit[0] && todaySplit[1] > startSplit[1]) ||
-      (todaySplit[0] === startSplit[0] &&
-        todaySplit[1] === startSplit[1] &&
-        todaySplit[2] > startSplit[2])
-    ) {
-      setError((obj) => ({ ...obj, dateStart: "Lỗi trước hôm nay" }));
-      return false;
-    }
-
-    if (
-      startSplit[0] > endSplit[0] ||
-      (startSplit[0] === endSplit[0] && startSplit[1] > endSplit[1]) ||
-      (startSplit[0] === endSplit[0] &&
-        startSplit[1] === endSplit[1] &&
-        startSplit[2] > endSplit[2])
-    ) {
-      setError((obj) => ({ ...obj, date: "Lỗi hết hạn trước bắt đầu" }));
-      return false;
-    }
   };
 
   const validInputNum = (value, item) => {
@@ -96,8 +50,8 @@ function CreateVoucher(props) {
       // limited: 0,
       // price: 0,
       // quantity: 0,
-      // dateStart: "",
-      // dateEnd: "",
+      dateStart: "",
+      dateEnd: "",
       service: "",
       // priceAt: 0
     };
@@ -115,23 +69,10 @@ function CreateVoucher(props) {
 
     setForm((obj) => ({ ...obj, limited: e.target.elements["limited"].value }));
 
-    const dateStart = e.target.elements["dateStart"].value;
-    const dateEnd = e.target.elements["dateEnd"].value;
-
-    if (validDate(dateStart, dateEnd)) {
-      setForm((obj) => ({ ...obj, dateStart: dateStart }));
-      setForm((obj) => ({ ...obj, dateEnd: dateEnd }));
-    }
-
     Object.keys(base).forEach((item) => {
       const value = e.target.elements[item].value;
       setForm((obj) => ({ ...obj, [item]: value }));
     });
-  };
-
-  const onInputCode = (e) => {
-    const value = e.target.value;
-    if (listId.includes(value)) return;
   };
 
   const onCheckQuantity = (e) => {
@@ -150,7 +91,6 @@ function CreateVoucher(props) {
                 type="text"
                 placeholder="Nhập mã voucher"
                 required
-                onChange={onInputCode}
               />
             </Form.Group>
             <Form.Group as={Col}>

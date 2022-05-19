@@ -3,28 +3,23 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import TaskAPI from "../../api/task.api";
+import { Services } from "../../Fake_Data";
 
 function CreateGiftcard(props) {
   const navigate = useNavigate();
   const [form, setForm] = useState({});
   const [error, setError] = useState({});
-  const [listId, setListId] = useState(["test"]);
   const [checkQuantity, setCheckQuantity] = useState(false);
 
-  useEffect(() => {
-    const res = TaskAPI.getGiftcardsId();
-    res.then((data) =>
-      data.forEach((item) => {
-        setListId((array) => [...array, item.id]);
-      })
-    );
-  }, []);
+  useEffect(() => {}, []);
 
   useEffect(() => {
-    if (Object.keys(form).length === 0) return;
-    TaskAPI.postGiftcard(form);
-    navigate("/giftcard/home");
-  }, [form, navigate]);
+    TaskAPI.postGiftcard(form)
+      .then((res) => {
+        navigate("/giftcard/home");
+      })
+      .catch((error) => setError((obj) => ({ ...obj, error })));
+  }, [navigate]);
 
   const validNum = (str) => {
     const reg = new RegExp("^\\d+$");
@@ -67,11 +62,6 @@ function CreateGiftcard(props) {
     });
   };
 
-  const onInputCode = (e) => {
-    const value = e.target.value;
-    if (listId.includes(value)) return;
-  };
-
   const onCheckQuantity = (e) => {
     setCheckQuantity(!checkQuantity);
   };
@@ -88,7 +78,6 @@ function CreateGiftcard(props) {
                 type="text"
                 placeholder="Nhập mã quà tặng"
                 required
-                onChange={onInputCode}
               />
             </Form.Group>
             <Form.Group as={Col}>
@@ -119,6 +108,16 @@ function CreateGiftcard(props) {
             </Form.Group>
           </Row>
           <Row className="my-3">
+            <Form.Group as={Col}>
+              <Form.Label>Chọn dịch vụ</Form.Label>
+              <Form.Select name="service">
+                {Services.map((item, index) => (
+                  <option value={item} key={index}>
+                    {item}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
             <Form.Group as={Col}>
               <Form.Label>Chọn trị giá</Form.Label>
               <Form.Select name="price">

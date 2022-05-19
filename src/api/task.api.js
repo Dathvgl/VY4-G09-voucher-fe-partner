@@ -5,23 +5,13 @@ const BaseURL = "http://139.59.234.205:8080/api";
 export default class TaskAPI {
   // Voucher
   static async getVouchers(service) {
-    const promise = axios.get(
-      `${BaseURL}/vouchers/find/?service=${service}`
-    );
+    const promise = axios.get(`${BaseURL}/vouchers/find/?service=${service}`);
     const dataPromise = promise.then((res) => res.data);
     return dataPromise;
   }
 
   static async getVoucher(id) {
-    const promise = axios.get(
-      `${BaseURL}/vouchers/find/voucher?id=${id}`
-    );
-    const dataPromise = promise.then((res) => res.data);
-    return dataPromise;
-  }
-
-  static async getVouchersId() {
-    const promise = axios.get(`${BaseURL}/vouchers/all-id`);
+    const promise = axios.get(`${BaseURL}/vouchers/find/voucher?id=${id}`);
     const dataPromise = promise.then((res) => res.data);
     return dataPromise;
   }
@@ -30,17 +20,11 @@ export default class TaskAPI {
     const partner = voucher.partner;
     delete voucher.partner;
 
-    axios.post(
-      `${BaseURL}/vouchers/create/partner?id=${partner}`,
-      voucher
-    );
+    axios.post(`${BaseURL}/vouchers/create/partner?id=${partner}`, voucher);
   }
 
   static async putVoucherArticle(id, article) {
-    axios.put(
-      `http://localhost:3001/vouchers/article/voucher?id=${id}`,
-      article
-    );
+    axios.put(`${BaseURL}/vouchers/article/voucher?id=${id}`, article);
   }
 
   static async deleteVoucher(id) {
@@ -66,17 +50,11 @@ export default class TaskAPI {
     const partner = article.partner;
     delete article.partner;
 
-    axios.post(
-      `${BaseURL}/articles/create/partner?id=${partner}`,
-      article
-    );
+    axios.post(`${BaseURL}/articles/create/partner?id=${partner}`, article);
   }
 
   static async putArticleContent(id, content) {
-    axios.put(
-      `${BaseURL}/articles/content/article?id=${id}`,
-      content
-    );
+    axios.put(`${BaseURL}/articles/content/article?id=${id}`, content);
   }
 
   static async deleteArticle(id) {
@@ -92,19 +70,13 @@ export default class TaskAPI {
     return dataPromise;
   }
 
-  static async getGiftcardsId() {
-    const promise = axios.get(`${BaseURL}/giftcards/all-id`);
-    const dataPromise = promise.then((res) => res.data);
-    return dataPromise;
-  }
-
   static async postGiftcard(giftcard) {
     const partner = giftcard.partner;
     delete giftcard.partner;
 
-    axios.post(
-      `${BaseURL}/giftcards/create/partner?id=${partner}`,
-      giftcard
-    );
+    axios.post(`${BaseURL}/giftcards/create/partner?id=${partner}`, giftcard);
+  }
+  static async deleteGiftCard(id) {
+    axios.delete(`${BaseURL}/giftcards/delete/giftcard?id=${id}`);
   }
 }
