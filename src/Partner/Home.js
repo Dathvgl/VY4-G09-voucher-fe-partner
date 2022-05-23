@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import { Container, Navbar } from "react-bootstrap";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import "./Home.css";
 
 function Home(props) {
@@ -43,6 +43,13 @@ function Home(props) {
               Thẻ quà tặng
             </NavLink>
           </Navbar.Collapse>
+          <ul className="nav navbar-nav">
+            <li>
+              <Link className="nav-link text-dark" to={"/"}>
+                Log out
+              </Link>
+            </li>
+          </ul>
         </Container>
       </Navbar>
       <Outlet />

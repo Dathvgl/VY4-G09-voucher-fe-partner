@@ -15,7 +15,21 @@ function CreateVoucher(props) {
   useEffect(() => {
     if (Object.keys(form).length === 0) return;
     if (Object.keys(error).length !== 0) return;
-    TaskAPI.postVoucher(form);
+
+    if (form.dateStart === "") {
+      form.dateStart = null;
+    }
+
+    if (form.dateEnd === "") {
+      form.dateEnd = null;
+    }
+
+    TaskAPI.postVoucher(form)
+      .then((res) => console.log(res))
+      .catch((error) => {
+        const message = error.response.data.message;
+        setError(message);
+      });
     navigate("/voucher/home");
   }, [form, error, navigate]);
 
@@ -50,22 +64,21 @@ function CreateVoucher(props) {
       // limited: 0,
       // price: 0,
       // quantity: 0,
-      dateStart: "",
-      dateEnd: "",
+      dateStart: null,
+      dateEnd: null,
       service: "",
       // priceAt: 0
     };
 
     setForm((obj) => ({ ...obj, placeUse: placeUseList }));
     setForm((obj) => ({ ...obj, partner: props.partner }));
-    setForm((obj) => ({ ...obj, userUse: [] }));
-    setForm((obj) => ({ ...obj, userOwned: [] }));
 
     if (checkQuantity) setForm((obj) => ({ ...obj, quantity: -1 }));
     else validInputNum(e.target.elements["quantity"].value, "quantity");
 
     validInputNum(e.target.elements["discount"].value, "discount");
-    validInputNum(e.target.elements["priceAt"].value, "priceAt");
+    validInputNum(e.target.elements["priceAct"].value, "priceAct");
+    validInputNum(e.target.elements["price"].value, "price");
 
     setForm((obj) => ({ ...obj, limited: e.target.elements["limited"].value }));
 
@@ -92,6 +105,9 @@ function CreateVoucher(props) {
                 placeholder="Nhập mã voucher"
                 required
               />
+              {error.id !== undefined && (
+                <div className="text-danger">{error.id}</div>
+              )}
             </Form.Group>
             <Form.Group as={Col}>
               <Form.Label>Chọn dịch vụ</Form.Label>

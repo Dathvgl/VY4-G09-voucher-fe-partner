@@ -54,8 +54,6 @@ function CreateGiftcard(props) {
     };
 
     setForm((obj) => ({ ...obj, partner: props.partner }));
-    setForm((obj) => ({ ...obj, userUse: [] }));
-    setForm((obj) => ({ ...obj, userOwned: [] }));
 
     if (checkQuantity) setForm((obj) => ({ ...obj, quantity: -1 }));
     else validInputNum(e.target.elements["quantity"].value, "quantity");

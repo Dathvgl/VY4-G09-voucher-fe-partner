@@ -21,7 +21,7 @@ function Home() {
 
   const onDelete = (e) => {
     const id = e.target.value;
-    TaskAPI.deleteArticle(id);
+    TaskAPI.deleteVoucher(id);
   };
 
   const onSelectSearch = (e) => {
@@ -66,11 +66,17 @@ function Home() {
                 <tr className="align-middle" key={index}>
                   <td>{item.id}</td>
                   <td>
-                    <div>{item.dateStart}</div>
-                    <div>{item.dateEnd}</div>
+                    {item.dateStart != null && (
+                      <div>{item.dateStart.slice(0, 10)}</div>
+                    )}
+                    {item.dateEnd != null && (
+                      <div>{item.dateEnd.slice(0, 10)}</div>
+                    )}
                   </td>
                   <td className="text-center">{item.quantity}</td>
-                  <td>{item.discount}% - {item.limited}đ</td>
+                  <td>
+                    {item.discount}% - {item.limited}đ
+                  </td>
                   <td>{item.status}</td>
                   <td className="text-center">
                     <Button

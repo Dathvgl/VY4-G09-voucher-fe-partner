@@ -20,7 +20,7 @@ export default class TaskAPI {
     const partner = voucher.partner;
     delete voucher.partner;
 
-    axios.post(`${BaseURL}/vouchers/create/partner?id=${partner}`, voucher);
+    return axios.post(`${BaseURL}/vouchers/create/partner?id=${partner}`, voucher);
   }
 
   static async putVoucherArticle(id, article) {
