@@ -202,7 +202,7 @@ function CreateVoucher(props) {
             <Form.Group as={Col}>
               <Form.Label>Giá bắt đầu áp dụng</Form.Label>
               <Form.Control
-                name="priceAt"
+                name="priceAct"
                 type="text"
                 defaultValue={0}
               ></Form.Control>
