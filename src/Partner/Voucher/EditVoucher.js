@@ -11,7 +11,10 @@ function EditVoucher() {
 
   useEffect(() => {
     const resVoucher = TaskAPI.getVoucher(location.state.id);
-    resVoucher.then((data) => setVoucher(data));
+    resVoucher.then((data) => {
+      setVoucher(data);
+      console.log(data);
+    });
 
     const resArticle = TaskAPI.getArticleAll();
     resArticle.then((data) => setArticles(data));
@@ -45,18 +48,12 @@ function EditVoucher() {
             )}
           </Col>
           <Col lg="3">
-            <h3>Trị giá</h3>
-            <div>{voucher.value}</div>
-          </Col>
-        </Row>
-        <Row className="my-3">
-          <Col lg="3">
-            <h3>Ngày bắt đầu</h3>
-            <div>{voucher.dateStart}</div>
-          </Col>
-          <Col lg="3">
-            <h3>Ngày hết hạn</h3>
-            <div>{voucher.dateEnd}</div>
+            <h3>Nơi sử dụng</h3>
+            {voucher.placeUse !== '' ? (
+              <div>{voucher.placeUse}</div>
+            ) : (
+              <div>Không có</div>
+            )}
           </Col>
         </Row>
         <Form onSubmit={onFormSubmit}>

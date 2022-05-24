@@ -44,9 +44,6 @@ function Home() {
           <thead>
             <tr>
               <th>Mã quà tặng</th>
-              <th>Ngày tạo</th>
-              <th>Ngày sử dụng</th>
-              <th>Người sử dụng</th>
               <th>Mệnh giá</th>
               <th>Tùy chọn</th>
             </tr>
@@ -56,10 +53,7 @@ function Home() {
               return (
                 <tr key={index}>
                   <td>{item.id}</td>
-                  <td>{item.dateCreate}</td>
-                  <td>{item.dateUse}</td>
-                  <td>{item.userUse}</td>
-                  <td>{item.price}</td>
+                  <td>{item.price.toLocaleString("en").replace(",", ".")} đ</td>
                   <td>
                     <Button onClick={onDelete} value={item.id} variant="danger">
                       Xóa

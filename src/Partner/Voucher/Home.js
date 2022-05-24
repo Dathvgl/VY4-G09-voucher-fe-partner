@@ -75,7 +75,7 @@ function Home() {
                   </td>
                   <td className="text-center">{item.quantity}</td>
                   <td>
-                    {item.discount}% - {item.limited}đ
+                    {item.discount}% - {item.limited.toLocaleString("en").replace(",", ".")} đ
                   </td>
                   <td>{item.status}</td>
                   <td className="text-center">

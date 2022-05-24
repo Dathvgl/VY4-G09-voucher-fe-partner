@@ -18,12 +18,14 @@ function CreateGiftcard(props) {
     if (Object.keys(error).length !== 0) return;
     TaskAPI.postGiftcard(form)
       .then((res) => {
-        if (res.ok) {
+        if (res.status === 201) {
           navigate("/giftcard/home");
         }
       })
-      .catch((error) => setError((obj) => ({ ...obj, error })));
-      console.log(error);
+      .catch((error) => {
+        const message = error.response.data.message;
+        setError(message);
+      });
   }, [form, error, navigate]);
 
   const validNum = (str) => {
@@ -83,6 +85,9 @@ function CreateGiftcard(props) {
                 placeholder="Nhập mã quà tặng"
                 required
               />
+              {error.id !== undefined && (
+                <div className="text-danger">{error.id}</div>
+              )}
             </Form.Group>
             <Form.Group as={Col}>
               <Form.Label>Tên quà tặng</Form.Label>

@@ -25,12 +25,15 @@ function CreateVoucher(props) {
     }
 
     TaskAPI.postVoucher(form)
-      .then((res) => console.log(res))
+      .then((res) => {
+        if (res.status === 201) {
+          navigate("/voucher/home");
+        }
+      })
       .catch((error) => {
         const message = error.response.data.message;
         setError(message);
       });
-    navigate("/voucher/home");
   }, [form, error, navigate]);
 
   useEffect(() => {
@@ -70,7 +73,7 @@ function CreateVoucher(props) {
       // priceAt: 0
     };
 
-    setForm((obj) => ({ ...obj, placeUse: placeUseList }));
+    setForm((obj) => ({ ...obj, placeUse: placeUseList.toString() }));
     setForm((obj) => ({ ...obj, partner: props.partner }));
 
     if (checkQuantity) setForm((obj) => ({ ...obj, quantity: -1 }));
@@ -79,8 +82,7 @@ function CreateVoucher(props) {
     validInputNum(e.target.elements["discount"].value, "discount");
     validInputNum(e.target.elements["priceAct"].value, "priceAct");
     validInputNum(e.target.elements["price"].value, "price");
-
-    setForm((obj) => ({ ...obj, limited: e.target.elements["limited"].value }));
+    validInputNum(e.target.elements["limited"].value, "limited");
 
     Object.keys(base).forEach((item) => {
       const value = e.target.elements[item].value;
