@@ -77,7 +77,20 @@ export default class TaskAPI {
 
     return axios.post(`${BaseURL}/giftcards/create/partner?id=${partner}`, giftcard);
   }
+
   static async deleteGiftCard(id) {
     axios.delete(`${BaseURL}/giftcards/delete/giftcard?id=${id}`);
+  }
+
+  static async getContactSearch(type, category) {
+    const promise = axios.get(
+      `${BaseURL}/contacts/find?type=${type}&category=${category}`
+    );
+    const dataPromise = promise.then((res) => res.data);
+    return dataPromise;
+  }
+
+  static async deleteContact(id) {
+    axios.delete(`${BaseURL}/contacts/delete/contact?id=${id}`);
   }
 }

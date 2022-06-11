@@ -42,6 +42,16 @@ function Home(props) {
             >
               Thẻ quà tặng
             </NavLink>
+            <NavLink
+              className={(classActive) =>
+                classActive.isActive
+                  ? "active-link link rounded mx-2"
+                  : "link rounded mx-2"
+              }
+              to={"payment/home"}
+            >
+              Thanh toán
+            </NavLink>
           </Navbar.Collapse>
           <ul className="nav navbar-nav">
             <li>

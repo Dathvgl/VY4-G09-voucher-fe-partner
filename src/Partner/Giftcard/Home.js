@@ -44,6 +44,7 @@ function Home() {
           <thead>
             <tr>
               <th>Mã quà tặng</th>
+              <th>Số lượng</th>
               <th>Mệnh giá</th>
               <th>Tùy chọn</th>
             </tr>
@@ -53,6 +54,7 @@ function Home() {
               return (
                 <tr key={index}>
                   <td>{item.id}</td>
+                  <td>{item.quantity === -1 ? "Vô hạn" : item.quantity}</td>
                   <td>{item.price.toLocaleString("en").replace(",", ".")} đ</td>
                   <td>
                     <Button onClick={onDelete} value={item.id} variant="danger">

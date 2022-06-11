@@ -73,9 +73,12 @@ function Home() {
                       <div>{item.dateEnd.slice(0, 10)}</div>
                     )}
                   </td>
-                  <td className="text-center">{item.quantity}</td>
+                  <td className="text-center">
+                    {item.quantity === -1 ? "Vô hạn" : item.quantity}
+                  </td>
                   <td>
-                    {item.discount}% - {item.limited.toLocaleString("en").replace(",", ".")} đ
+                    {item.discount}% -{" "}
+                    {item.limited.toLocaleString("en").replace(",", ".")} đ
                   </td>
                   <td>{item.status}</td>
                   <td className="text-center">

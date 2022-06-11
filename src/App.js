@@ -10,6 +10,7 @@ import PartnerGiftcard from "./Partner/Giftcard/Home";
 import CreateGiftcard from "./Partner/Giftcard/CreateGiftcard";
 import EditVoucher from "./Partner/Voucher/EditVoucher";
 import EditArticle from "./Partner/Article/EditArticle";
+import PartnerPayment from "./Partner/Payment/Home";
 
 function App() {
   const [partner, setPartner] = useState("");
@@ -28,16 +29,23 @@ function App() {
           element={<CreateVoucher partner={partner} />}
         />
         <Route path="voucher/edit-voucher/*" element={<EditVoucher />} />
+
         <Route path="article/home" element={<PartnerArticle />} />
         <Route
           path="article/create-article"
           element={<CreateArticle partner={partner} />}
         />
         <Route path="article/edit-article/*" element={<EditArticle />} />
+
         <Route path="giftcard/home" element={<PartnerGiftcard />} />
         <Route
           path="giftcard/create-giftcard"
           element={<CreateGiftcard partner={partner} />}
+        />
+
+        <Route
+          path="payment/home"
+          element={<PartnerPayment partner={partner} />}
         />
       </Routes>
     </React.Fragment>
