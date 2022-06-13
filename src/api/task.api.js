@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const BaseURL = "http://139.59.234.205:8080/api";
-const BaseURL = "http://localhost:3000/api";
+const BaseURL = "http://139.59.234.205:8080/api";
+// const BaseURL = "http://localhost:3000/api";
 
 export default class TaskAPI {
   // Voucher
