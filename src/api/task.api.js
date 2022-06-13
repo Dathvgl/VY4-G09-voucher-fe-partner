@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BaseURL = "http://139.59.234.205:8080/api";
-// const BaseURL = "http://localhost:3000/api";
+// const BaseURL = "http://139.59.234.205:8080/api";
+const BaseURL = "http://localhost:3000/api";
 
 export default class TaskAPI {
   // Voucher
@@ -80,6 +80,14 @@ export default class TaskAPI {
 
   static async deleteGiftCard(id) {
     axios.delete(`${BaseURL}/giftcards/delete/giftcard?id=${id}`);
+  }
+
+  static async getContacts() {
+    const promise = axios.get(
+      `${BaseURL}/contacts/`
+    );
+    const dataPromise = promise.then((res) => res.data);
+    return dataPromise;
   }
 
   static async getContactSearch(type, category) {

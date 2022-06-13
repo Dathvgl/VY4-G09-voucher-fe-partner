@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Button, Col, Container, Form, Row, Table } from "react-bootstrap";
 import TaskAPI from "../../api/task.api";
 
@@ -24,7 +25,12 @@ function Home() {
   return (
     <React.Fragment>
       <Container>
-        <h2 className="my-2">Danh sách thanh toán</h2>
+        <div className="d-flex align-items-center justify-content-between my-2">
+          <h2 className="my-2">Danh sách thanh toán</h2>
+          <Link className="mx-2" to={"../payment/statistic"}>
+            <Button variant="primary">Thống kê</Button>
+          </Link>
+        </div>
         <Row>
           <Col lg={6}>
             <Form.Select onChange={(e) => setType(e.target.value)}>

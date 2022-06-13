@@ -11,6 +11,7 @@ import CreateGiftcard from "./Partner/Giftcard/CreateGiftcard";
 import EditVoucher from "./Partner/Voucher/EditVoucher";
 import EditArticle from "./Partner/Article/EditArticle";
 import PartnerPayment from "./Partner/Payment/Home";
+import Statistic from "./Partner/Payment/Statistic";
 
 function App() {
   const [partner, setPartner] = useState("");
@@ -46,6 +47,10 @@ function App() {
         <Route
           path="payment/home"
           element={<PartnerPayment partner={partner} />}
+        />
+        <Route
+          path="payment/statistic"
+          element={<Statistic partner={partner} />}
         />
       </Routes>
     </React.Fragment>
